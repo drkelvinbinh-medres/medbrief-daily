@@ -22,26 +22,26 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 3. Thiết lập Android SDK & Chấp nhận License
-        uses: android-actions/setup-android@v3
-
-      - name: 4. Cài đặt Android Build-Tools & Platform 34
+      - name: 3. Tự động chấp nhận Android SDK Licenses
         run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+          mkdir -p "$ANDROID_HOME/licenses" || true
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+          echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> "$ANDROID_HOME/licenses/android-sdk-license"
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      - name: 5. Thiết lập Gradle
+      - name: 4. Thiết lập Gradle 8.4
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.4'
-          cache-disabled: true # Tránh lỗi khi dịch vụ cache của GitHub bị gián đoạn
+          cache-disabled: true
 
-      - name: 6. Đồng bộ Web Assets vào thư mục Android
+      - name: 5. Đồng bộ Web Assets vào thư mục Android
         run: |
           mkdir -p android/app/src/main/assets/www
           cp index.html styles.css app.js manifest.json sw.js icon-192.png icon-512.png android/app/src/main/assets/www/
 
-      - name: 7. Biên dịch Android APK
+      - name: 6. Biên dịch Android APK
         working-directory: ./android
         run: |
           gradle assembleDebug --stacktrace --no-daemon
@@ -51,14 +51,14 @@ jobs:
           echo "Biên dịch APK thành công!"
           ls -lh ../output-apk/
 
-      - name: 8. Tải lên Tệp APK (GitHub Artifacts)
+      - name: 7. Tải lên Tệp APK (GitHub Artifacts)
         uses: actions/upload-artifact@v4
         with:
           name: MedBrief-Endocrinology-Android-APK
           path: output-apk/MedBrief-Endocrinology-v1.0.apk
           retention-days: 30
 
-      - name: 9. Tạo GitHub Release
+      - name: 8. Tạo GitHub Release
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
