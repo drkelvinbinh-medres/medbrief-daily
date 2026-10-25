@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D9488" />
+  <title>MedBrief Daily | Curation Y Văn Nội Tiết & Học Tiếng Anh Y Khoa</title>
+  
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         1. Header Tối Giản & Bộ Lọc Nguồn Tạp Chí Quốc Tế (Minimal Header)
+         ==================================================================== -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand-wrapper">
+          <div class="logo-badge" aria-label="Logo Y Khoa">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+          </div>
+          <div class="brand-meta">
+            <h1>MedBrief Endocrinology</h1>
+            <span class="sub-text">AI Curation • High-Impact Journals</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Đổi giao diện Sáng / Trực đêm" title="Chế độ Trực đêm">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 1.1 Bộ lọc Tạp chí Quốc tế Ưu tiên (Journal Badges Filter) -->
+      <div class="filter-section-label">Nguồn Tạp chí Ưu tiên:</div>
+      <nav class="journal-scroll-wrapper" aria-label="Lọc theo tạp chí">
+        <button class="journal-chip active" data-journal="all">Tất cả tạp chí</button>
+        <button class="journal-chip" data-journal="lancet-endo">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-lancet-dot);"></span>
+          Lancet Diabetes
+        </button>
+        <button class="journal-chip" data-journal="diabetes-care">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-care-dot);"></span>
+          Diabetes Care (ADA)
+        </button>
+        <button class="journal-chip" data-journal="nejm">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-nejm-dot);"></span>
+          NEJM
+        </button>
+        <button class="journal-chip" data-journal="jcem">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-jcem-dot);"></span>
+          JCEM
+        </button>
+        <button class="journal-chip" data-journal="endo-rev">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-rev-dot);"></span>
+          Endocrine Reviews
+        </button>
+        <button class="journal-chip" data-journal="thyroid">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-thyroid-dot);"></span>
+          Thyroid (ATA)
+        </button>
+        <button class="journal-chip" data-journal="diabetologia">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-diab-dot);"></span>
+          Diabetologia (EASD)
+        </button>
+        <button class="journal-chip" data-journal="jama-lancet">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--badge-jama-dot);"></span>
+          The Lancet / JAMA
+        </button>
+      </nav>
+
+      <!-- 1.2 Phân loại Chuyên mục Tự động -->
+      <nav class="category-scroll-wrapper" style="margin-top: 6px;" aria-label="Lọc theo phân loại">
+        <button class="category-chip active" data-cat="all">Tất cả chuyên mục</button>
+        <button class="category-chip" data-cat="diabetes_obesity">Đái tháo đường & Béo phì</button>
+        <button class="category-chip" data-cat="thyroid">Tuyến giáp</button>
+        <button class="category-chip" data-cat="general_endo">Nội tiết / Thượng thận / Xương</button>
+        <button class="category-chip" data-cat="landmark_trials">Thử nghiệm lớn (NEJM/Lancet)</button>
+      </nav>
+    </header>
+
+    <!-- ====================================================================
+         2. Feed Danh sách Bài báo Y văn (Card-Based Feed)
+         ==================================================================== -->
+    <main class="feed-content">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim);">
+          Điểm Tin Lâm Sàng & Tiếng Anh Y Khoa
+        </span>
+        <div style="display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--accent-primary);">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent-primary);"></span>
+          <span>PubMed Auto-Curated</span>
+        </div>
+      </div>
+
+      <!-- Vùng render danh sách bài viết từ app.js -->
+      <div id="feedListContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+    </main>
+
+    <!-- ====================================================================
+         3. Thanh Điều Hướng Dưới Cùng (Bottom Navigation)
+         ==================================================================== -->
+    <nav class="bottom-nav" aria-label="Thanh điều hướng">
+      <button class="nav-tab active" data-tab="today">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+        <span style="font-size: 11px;">Hôm nay</span>
+      </button>
+
+      <button class="nav-tab" data-tab="specialties">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+        </svg>
+        <span style="font-size: 11px;">Chuyên khoa</span>
+      </button>
+
+      <button class="nav-tab" data-tab="saved" style="position: relative;">
+        <div style="position: relative; display: inline-block;">
+          <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+          </svg>
+          <span id="savedBadge" class="saved-counter-badge">0</span>
+        </div>
+        <span style="font-size: 11px;">Đã lưu</span>
+      </button>
+
+      <button class="nav-tab" data-tab="ai">
+        <div style="width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, rgba(45,212,191,0.25), rgba(167,139,250,0.25)); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
+          <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span style="font-size: 11px; font-weight: 600; color: var(--accent-primary);">Hỏi AI</span>
+      </button>
+    </nav>
+
+    <!-- ====================================================================
+         4. Article Detail View: Phân Tích Sâu & Song Ngữ Anh - Việt
+         (Clinical Deep-Dive & Medical English Masterclass & In-Article AI Chat)
+         ==================================================================== -->
+    <div id="detailModal" class="detail-modal-overlay" role="dialog" aria-modal="true">
+      <div class="detail-sheet" id="detailSheet">
+        <div class="sheet-handle"></div>
+
+        <!-- Thanh chuyển đổi nhanh chế độ hiển thị Song Ngữ -->
+        <div class="lang-mode-bar" role="tablist">
+          <button class="lang-tab active" data-lang="bilingual" role="tab">🌐 Song ngữ Anh - Việt</button>
+          <button class="lang-tab" data-lang="vi" role="tab">🇻🇳 Chỉ Tiếng Việt</button>
+          <button class="lang-tab" data-lang="en" role="tab">🇬🇧 English Only</button>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+            <span id="dJournalBadge" class="journal-badge"></span>
+            <span id="dCategoryTag" class="topic-tag"></span>
+          </div>
+          <button id="detailCloseBtn" style="background: var(--bg-subtle); border: none; width: 28px; height: 28px; border-radius: 50%; color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+        </div>
+
+        <!-- Tiêu đề Song ngữ -->
+        <h2 id="dTitleVi" style="font-size: 16px; font-weight: 700; color: var(--text-main); line-height: 1.35; margin-bottom: 4px;"></h2>
+        <h3 id="dTitleEn" style="font-size: 12.5px; font-weight: 500; font-style: italic; color: var(--text-dim); line-height: 1.35; margin-bottom: 8px;"></h3>
+
+        <!-- Metadata & DOI -->
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-dim); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border-light);">
+          <span id="dMeta"></span>
+          <a id="dDoiLink" href="#" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">DOI Link ↗</a>
+        </div>
+
+        <!-- Tóm tắt súc tích 2 dòng -->
+        <div class="box-highlight">
+          <div class="box-label">
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Tóm tắt cô đọng (Executive Abstract)
+          </div>
+          <p id="dSummaryVi" style="font-size: 13px; color: var(--text-main); line-height: 1.55; margin-bottom: 4px;"></p>
+          <p id="dSummaryEn" style="font-size: 12px; color: var(--text-muted); line-height: 1.45; font-style: italic;"></p>
+        </div>
+
+        <!-- Key Takeaways: 3 Điểm cốt lõi thay đổi thực hành lâm sàng -->
+        <div style="margin-bottom: 14px;">
+          <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span style="color: #F59E0B;">⭐</span> 3 Điểm Cốt Lõi Thay Đổi Thực Hành Lâm Sàng (Key Takeaways):
+          </div>
+          <ul id="dKeyTakeaways" style="padding-left: 18px; margin: 0;"></ul>
+        </div>
+
+        <!-- Clinical Implication: Gợi ý ứng dụng thực tế tại bệnh viện/phòng khám -->
+        <div class="box-highlight" style="border-left-color: #10B981; background-color: rgba(16, 185, 129, 0.08);">
+          <div class="box-label" style="color: #059669;">
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Clinical Implication (Ứng Dụng Thực Hành Lâm Sàng)
+          </div>
+          <div id="dClinicalImplication"></div>
+        </div>
+
+        <!-- Clinical Deep-Dive: Phân tích lâm sàng chuyên sâu -->
+        <div style="margin-bottom: 16px;">
+          <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+            🔬 Clinical Deep-Dive (Phân Tích Thử Nghiệm Lâm Sàng Chuyên Sâu):
+          </div>
+          <div id="dDeepDiveBox"></div>
+        </div>
+
+        <!-- Medical English Masterclass: Góc học tiếng Anh y khoa chuyên ngành -->
+        <section class="english-section">
+          <div class="english-section-header">
+            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span>Medical English Masterclass (Góc Tiếng Anh Y Khoa)</span>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px;">
+            1. Vocabulary Highlights (Từ vựng chuyên ngành trong bài):
+          </div>
+          <div id="dVocabList"></div>
+
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-top: 10px; margin-bottom: 6px;">
+            2. Academic Phraseology (Cấu trúc học thuật chuẩn Lancet/JCEM):
+          </div>
+          <div id="dPhraseList"></div>
+        </section>
+
+        <!-- Contextual In-Article AI Chat Box (Thảo luận chuyên sâu cùng AI về bài báo này) -->
+        <div class="article-ai-chat-box">
+          <div class="ai-chat-title-row">
+            <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent-primary-soft); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
+              <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+            </div>
+            <div>
+              <div style="font-size: 12.5px; font-weight: 700; color: var(--text-main);">Thảo Luận Chuyên Sâu Cùng AI Về Bài Báo Này</div>
+              <div style="font-size: 10.5px; color: var(--accent-primary);">Hỏi đáp phương pháp nghiên cứu, liều lượng & thuật ngữ tiếng Anh</div>
+            </div>
+          </div>
+
+          <!-- Gợi ý câu hỏi thông minh theo ngữ cảnh -->
+          <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px;">
+            <button class="ai-smart-chip smart-query-chip" data-q="Phân tích chỉ số Hazard Ratio và khoảng tin cậy 95% CI trong nghiên cứu này">📊 Phân tích p-value & 95% CI</button>
+            <button class="ai-smart-chip smart-query-chip" data-q="Phác đồ liều khởi đầu và chuẩn độ trên lâm sàng">💊 Liều khởi đầu & Chuẩn độ</button>
+            <button class="ai-smart-chip smart-query-chip" data-q="Giải thích chi tiết thuật ngữ tiếng Anh y khoa trong bài báo">🇬🇧 Học thuật ngữ tiếng Anh</button>
+          </div>
+
+          <!-- Luồng tin nhắn chat trong bài báo -->
+          <div id="inArticleChatStream" class="context-chat-stream"></div>
+
+          <!-- Ô nhập tin nhắn -->
+          <div style="display: flex; gap: 6px; align-items: center; background: var(--bg-subtle); padding: 4px 10px; border-radius: var(--radius-full); border: 1px solid var(--border-light);">
+            <input type="text" id="inArticleAiInput" placeholder="Đặt câu hỏi làm rõ về bài báo này..." style="flex: 1; background: transparent; border: none; outline: none; font-size: 12px; color: var(--text-main);" />
+            <button id="inArticleAiSend" style="background: var(--accent-primary); border: none; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nút lưu bài viết trong modal -->
+        <button id="dModalBookmarkBtn" class="journal-chip" style="width: 100%; margin-top: 16px; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; background: var(--accent-primary-soft); color: var(--accent-primary); border: none; border-radius: var(--radius-md); cursor: pointer;">
+          <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+          <span>Lưu bản tin này</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         5. Global AI Modal (Hỏi Chung Toàn Diện)
+         ==================================================================== -->
+    <div id="globalAiModal" class="detail-modal-overlay" role="dialog" aria-modal="true">
+      <div class="detail-sheet" style="max-height: 85vh;">
+        <div class="sheet-handle"></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--accent-primary-soft); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
+              <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-main);">Trợ Lý Y Văn Nội Tiết & Chuyển Hóa</div>
+          </div>
+          <button id="globalAiClose" style="background: var(--bg-subtle); border: none; width: 28px; height: 28px; border-radius: 50%; color: var(--text-dim); cursor: pointer;">✕</button>
+        </div>
+
+        <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
+          <button class="global-ai-chip ai-smart-chip" data-prompt="So sánh Tirzepatide và Semaglutide theo nghiên cứu SURMOUNT-5">⚡ Tirzepatide vs Semaglutide</button>
+          <button class="global-ai-chip ai-smart-chip" data-prompt="Tiêu chuẩn ADA 2026 về CGM và Time in Range">📊 ADA 2026: CGM & TIR</button>
+          <button class="global-ai-chip ai-smart-chip" data-prompt="Kháng I-131 trong ung thư giáp và đột biến BRAF/TERT">🧬 Kháng I-131 & Gen BRAF</button>
+        </div>
+
+        <div id="globalChatArea" style="max-height: 260px; min-height: 180px; overflow-y: auto; display: flex; flex-direction: column; padding: 4px; margin-bottom: 12px;">
+          <div style="background-color: var(--bg-subtle); padding: 10px 12px; border-radius: 12px; font-size: 12.5px; color: var(--text-main); border: 1px solid var(--border-light); line-height: 1.5;">
+            Chào Bác sĩ! Tôi là hệ thống Curation AI chuyên biệt theo dõi 8 tạp chí Nội tiết hàng đầu quốc tế (The Lancet Diabetes & Endo, Diabetes Care, JCEM, Endocrine Reviews, Thyroid, EASD, NEJM, JAMA). Bác sĩ muốn tra cứu nghiên cứu nào hôm nay?
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 6px; align-items: center; background: var(--bg-subtle); padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-light);">
+          <input type="text" id="globalAiInput" placeholder="Hỏi phác đồ, thuốc mới, dịch y văn..." style="flex: 1; background: transparent; border: none; outline: none; font-size: 12.5px; color: var(--text-main);" />
+          <button id="globalAiSend" style="background: var(--accent-primary); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg style="width: 15px; height: 15px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Register PWA Service Worker for Offline & APK Installation
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('ServiceWorker registered with scope:', reg.scope))
+          .catch((err) => console.log('ServiceWorker registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

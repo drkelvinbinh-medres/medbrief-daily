@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.MedBrief" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#0D1520</item>
+        <item name="android:navigationBarColor">#0D1520</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>

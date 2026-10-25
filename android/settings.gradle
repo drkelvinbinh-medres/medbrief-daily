@@ -1,0 +1,2 @@
+rootProject.name = "MedBriefDaily"
+include ':app'

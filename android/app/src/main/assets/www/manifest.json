@@ -1,0 +1,26 @@
+{
+  "name": "MedBrief Endocrinology & Diabetes",
+  "short_name": "MedBrief",
+  "description": "Ứng dụng Y khoa Online - Điểm tin Nội tiết, Đái tháo đường & Học tiếng Anh Y khoa",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D1520",
+  "theme_color": "#0D9488",
+  "categories": ["medical", "education", "health"],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

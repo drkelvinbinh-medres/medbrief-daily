@@ -1,0 +1,19 @@
+# Android build artifacts
+.gradle/
+build/
+output-apk/
+*.iml
+android/.gradle/
+android/build/
+android/app/build/
+local.properties
+.idea/
+
+# OS and temp files
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+setup_res.ps1
+copy_assets.ps1
+generate_icons.ps1
